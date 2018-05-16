@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hc.system.dao.GrilMapper">
+    <resultMap id="BaseResultMap" type="com.hc.system.entity.Gril">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="cup_size" jdbcType="VARCHAR" property="cupSize"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, age, cup_size
+  </sql>
+
+    <select id="queryGrilList" resultType="com.hc.system.entity.Gril">
+    SELECT * from gril where 1=1
+  </select>
+</mapper>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hc.system.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.hc.system.entity.User">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="UserName" jdbcType="VARCHAR" property="username" />
+    <result column="LoweredUserName" jdbcType="VARCHAR" property="loweredusername" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+    <result column="IsApproved" jdbcType="INTEGER" property="isapproved" />
+    <result column="IsLockedOut" jdbcType="INTEGER" property="islockedout" />
+    <result column="CreateDate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="LastLoginDate" jdbcType="TIMESTAMP" property="lastlogindate" />
+    <result column="LastPasswordChangedDate" jdbcType="TIMESTAMP" property="lastpasswordchangeddate" />
+    <result column="LastLockoutDate" jdbcType="TIMESTAMP" property="lastlockoutdate" />
+    <result column="FailedPasswordAttemptCount" jdbcType="INTEGER" property="failedpasswordattemptcount" />
+    <result column="FailedPasswordAttemptWindowStart" jdbcType="TIMESTAMP" property="failedpasswordattemptwindowstart" />
+    <result column="SecurityCode" jdbcType="VARCHAR" property="securitycode" />
+    <result column="AccessToken" jdbcType="VARCHAR" property="accesstoken" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, UserName, LoweredUserName, Password, IsApproved, IsLockedOut, CreateDate, LastLoginDate, 
+    LastPasswordChangedDate, LastLockoutDate, FailedPasswordAttemptCount, FailedPasswordAttemptWindowStart, 
+    SecurityCode, AccessToken
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_users
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_users
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hc.system.entity.User">
+    insert into sys_users (ID, UserName, LoweredUserName, 
+      Password, IsApproved, IsLockedOut, 
+      CreateDate, LastLoginDate, LastPasswordChangedDate, 
+      LastLockoutDate, FailedPasswordAttemptCount, 
+      FailedPasswordAttemptWindowStart, SecurityCode, 
+      AccessToken)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{loweredusername,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{isapproved,jdbcType=INTEGER}, #{islockedout,jdbcType=INTEGER}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{lastlogindate,jdbcType=TIMESTAMP}, #{lastpasswordchangeddate,jdbcType=TIMESTAMP}, 
+      #{lastlockoutdate,jdbcType=TIMESTAMP}, #{failedpasswordattemptcount,jdbcType=INTEGER}, 
+      #{failedpasswordattemptwindowstart,jdbcType=TIMESTAMP}, #{securitycode,jdbcType=VARCHAR}, 
+      #{accesstoken,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.system.entity.User">
+    insert into sys_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="username != null">
+        UserName,
+      </if>
+      <if test="loweredusername != null">
+        LoweredUserName,
+      </if>
+      <if test="password != null">
+        Password,
+      </if>
+      <if test="isapproved != null">
+        IsApproved,
+      </if>
+      <if test="islockedout != null">
+        IsLockedOut,
+      </if>
+      <if test="createdate != null">
+        CreateDate,
+      </if>
+      <if test="lastlogindate != null">
+        LastLoginDate,
+      </if>
+      <if test="lastpasswordchangeddate != null">
+        LastPasswordChangedDate,
+      </if>
+      <if test="lastlockoutdate != null">
+        LastLockoutDate,
+      </if>
+      <if test="failedpasswordattemptcount != null">
+        FailedPasswordAttemptCount,
+      </if>
+      <if test="failedpasswordattemptwindowstart != null">
+        FailedPasswordAttemptWindowStart,
+      </if>
+      <if test="securitycode != null">
+        SecurityCode,
+      </if>
+      <if test="accesstoken != null">
+        AccessToken,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="loweredusername != null">
+        #{loweredusername,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="isapproved != null">
+        #{isapproved,jdbcType=INTEGER},
+      </if>
+      <if test="islockedout != null">
+        #{islockedout,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogindate != null">
+        #{lastlogindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastpasswordchangeddate != null">
+        #{lastpasswordchangeddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlockoutdate != null">
+        #{lastlockoutdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failedpasswordattemptcount != null">
+        #{failedpasswordattemptcount,jdbcType=INTEGER},
+      </if>
+      <if test="failedpasswordattemptwindowstart != null">
+        #{failedpasswordattemptwindowstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="securitycode != null">
+        #{securitycode,jdbcType=VARCHAR},
+      </if>
+      <if test="accesstoken != null">
+        #{accesstoken,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.system.entity.User">
+    update sys_users
+    <set>
+      <if test="username != null">
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="loweredusername != null">
+        LoweredUserName = #{loweredusername,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="isapproved != null">
+        IsApproved = #{isapproved,jdbcType=INTEGER},
+      </if>
+      <if test="islockedout != null">
+        IsLockedOut = #{islockedout,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogindate != null">
+        LastLoginDate = #{lastlogindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastpasswordchangeddate != null">
+        LastPasswordChangedDate = #{lastpasswordchangeddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlockoutdate != null">
+        LastLockoutDate = #{lastlockoutdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failedpasswordattemptcount != null">
+        FailedPasswordAttemptCount = #{failedpasswordattemptcount,jdbcType=INTEGER},
+      </if>
+      <if test="failedpasswordattemptwindowstart != null">
+        FailedPasswordAttemptWindowStart = #{failedpasswordattemptwindowstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="securitycode != null">
+        SecurityCode = #{securitycode,jdbcType=VARCHAR},
+      </if>
+      <if test="accesstoken != null">
+        AccessToken = #{accesstoken,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.system.entity.User">
+    update sys_users
+    set UserName = #{username,jdbcType=VARCHAR},
+      LoweredUserName = #{loweredusername,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      IsApproved = #{isapproved,jdbcType=INTEGER},
+      IsLockedOut = #{islockedout,jdbcType=INTEGER},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      LastLoginDate = #{lastlogindate,jdbcType=TIMESTAMP},
+      LastPasswordChangedDate = #{lastpasswordchangeddate,jdbcType=TIMESTAMP},
+      LastLockoutDate = #{lastlockoutdate,jdbcType=TIMESTAMP},
+      FailedPasswordAttemptCount = #{failedpasswordattemptcount,jdbcType=INTEGER},
+      FailedPasswordAttemptWindowStart = #{failedpasswordattemptwindowstart,jdbcType=TIMESTAMP},
+      SecurityCode = #{securitycode,jdbcType=VARCHAR},
+      AccessToken = #{accesstoken,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
